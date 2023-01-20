@@ -9,7 +9,7 @@ public class GhostToClip : Tool, IHasOutput<CGameCtnMediaClip>
 
     public GhostToClip(CGameCtnGhost ghost)
     {
-        this.ghost = ghost;
+        this.ghost = ghost ?? throw new ArgumentNullException(nameof(ghost));
     }
 
     public CGameCtnMediaClip Produce()
