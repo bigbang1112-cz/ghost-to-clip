@@ -3,13 +3,13 @@ using GbxToolAPI;
 
 namespace GhostToClip;
 
-public class GhostToClip : Tool, IHasOutput<CGameCtnMediaClip>, IConfigurable<GhostToClipConfig>
+public class GhostToClipTool : Tool, IHasOutput<CGameCtnMediaClip>, IConfigurable<GhostToClipConfig>
 {
     private readonly CGameCtnGhost ghost;
 
     public GhostToClipConfig Config { get; set; } = new();
 
-    public GhostToClip(CGameCtnGhost ghost)
+    public GhostToClipTool(CGameCtnGhost ghost)
     {
         this.ghost = ghost ?? throw new ArgumentNullException(nameof(ghost));
     }
