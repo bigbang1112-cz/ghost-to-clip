@@ -3,7 +3,7 @@ using GbxToolAPI;
 
 namespace GhostToClip;
 
-public class GhostToClipTool : Tool, IHasOutput<CGameCtnMediaClip>, IConfigurable<GhostToClipConfig>
+public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurable<GhostToClipConfig>
 {
     private readonly CGameCtnGhost ghost;
 
