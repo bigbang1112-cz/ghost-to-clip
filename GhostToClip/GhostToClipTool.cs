@@ -20,7 +20,7 @@ public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurab
         var ghostBlock = GetGhostBlock();
 
         var ghostTrack = CGameCtnMediaTrack.Create()
-            .WithName(ghost.GhostNickname ?? "Ghost")
+            .WithName("Ghost")
             .WithBlocks(ghostBlock)
             .ForTMUF()
             .Build();
@@ -58,13 +58,14 @@ public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurab
         }
 
         return CGameCtnMediaBlockEntity.Create(ghost.RecordData)
-            .WithNoticeRecords(new[] { 1, 0 })
+            .WithNoticeRecords(Enumerable.Range(0, ghost.RecordData.EntList.Count).ToArray())
             .ForTM2020()
             .WithKeys(new CGameCtnMediaBlockEntity.Key(),
             new CGameCtnMediaBlockEntity.Key
             {
                 Time = ghost.RaceTime.GetValueOrDefault(TimeInt32.FromSeconds(3))
             })
+            .WithGhostName(ghost.GhostNickname ?? "Ghost")
             .Build();
     }
 
