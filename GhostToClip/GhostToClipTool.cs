@@ -4,6 +4,8 @@ using TmEssentials;
 
 namespace GhostToClip;
 
+[ToolName("Ghost to Clip")]
+[ToolDescription("Converts ghost to MediaTracker clip for variety of purposes.")]
 public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurable<GhostToClipConfig>
 {
     private readonly CGameCtnGhost ghost;
