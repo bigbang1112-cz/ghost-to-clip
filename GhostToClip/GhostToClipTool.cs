@@ -8,27 +8,41 @@ namespace GhostToClip;
 [ToolDescription("Converts ghost to MediaTracker clip for variety of purposes.")]
 public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurable<GhostToClipConfig>
 {
-    private readonly CGameCtnGhost ghost;
+    private readonly IEnumerable<CGameCtnGhost> ghosts;
 
     public GhostToClipConfig Config { get; set; } = new();
 
-    public GhostToClipTool(CGameCtnGhost ghost)
+    public GhostToClipTool(IEnumerable<CGameCtnGhost> ghosts)
     {
-        this.ghost = ghost ?? throw new ArgumentNullException(nameof(ghost));
+        this.ghosts = ghosts ?? throw new ArgumentNullException(nameof(ghosts));
     }
 
     public CGameCtnMediaClip Produce()
     {
-        var ghostBlock = GetGhostBlock();
+        var tracks = new List<CGameCtnMediaTrack>();
 
-        var ghostTrack = CGameCtnMediaTrack.Create()
-            .WithName("Ghost")
-            .WithBlocks(ghostBlock)
-            .ForTMUF()
-            .Build();
+        var longestGhostTime = TimeInt32.Zero;
+
+        foreach (var ghost in ghosts)
+        {
+            var ghostTrack = CGameCtnMediaTrack.Create()
+                .WithName("Ghost")
+                .WithBlocks(GetGhostBlock(ghost))
+                .ForTMUF()
+                .Build();
+
+            tracks.Add(ghostTrack);
+
+            var raceTime = ghost.RaceTime.GetValueOrDefault(TimeInt32.FromSeconds(3));
+
+            if (raceTime > longestGhostTime)
+            {
+                longestGhostTime = raceTime;
+            }
+        }
 
         var cameraBlock = CGameCtnMediaBlockCameraGame.Create()
-            .WithTimeRange(TimeSingle.Zero, ghost.RaceTime.GetValueOrDefault(TimeInt32.FromSeconds(3)))
+            .WithTimeRange(TimeSingle.Zero, longestGhostTime)
             .ForTM2020()
             .WithClipEntId(1)
             .Build();
@@ -39,20 +53,22 @@ public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurab
             .ForTMUF()
             .Build();
 
+        tracks.Add(cameraTrack);
+
         return CGameCtnMediaClip.Create()
-            .WithTracks(ghostTrack, cameraTrack)
+            .WithTracks(tracks)
             .ForTMUF()
             .Build();
     }
 
-    private CGameCtnMediaBlock GetGhostBlock() => Config.Game switch
+    private CGameCtnMediaBlock GetGhostBlock(CGameCtnGhost ghost) => Config.Game switch
     {
-        EGame.Trackmania => GetTrackmaniaGhostBlock(),
-        EGame.Trackmania2020 => GetTrackmania2020GhostBlock(),
+        EGame.Trackmania => GetTrackmaniaGhostBlock(ghost),
+        EGame.Trackmania2020 => GetTrackmania2020GhostBlock(ghost),
         _ => throw new NotSupportedException($"Game {Config.Game} is not supported."),
     };
 
-    private CGameCtnMediaBlockEntity GetTrackmania2020GhostBlock()
+    private static CGameCtnMediaBlockEntity GetTrackmania2020GhostBlock(CGameCtnGhost ghost)
     {
         if (ghost.RecordData is null)
         {
@@ -71,7 +87,7 @@ public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurab
             .Build();
     }
 
-    private CGameCtnMediaBlockGhost GetTrackmaniaGhostBlock()
+    private static CGameCtnMediaBlockGhost GetTrackmaniaGhostBlock(CGameCtnGhost ghost)
     {
         return CGameCtnMediaBlockGhost.Create(ghost)
             .ForTMUF()
