@@ -1,12 +1,13 @@
 ﻿using GBX.NET.Engines.Game;
 using GbxToolAPI;
+using System.Runtime.InteropServices.JavaScript;
 using TmEssentials;
 
 namespace GhostToClip;
 
 [ToolName("Ghost to Clip")]
 [ToolDescription("Converts ghost to MediaTracker clip for variety of purposes.")]
-public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurable<GhostToClipConfig>
+public class GhostToClipTool : ITool, IHasOutput<NodeFile<CGameCtnMediaClip>>, IConfigurable<GhostToClipConfig>
 {
     private readonly IEnumerable<CGameCtnGhost> ghosts;
 
@@ -17,7 +18,7 @@ public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurab
         this.ghosts = ghosts ?? throw new ArgumentNullException(nameof(ghosts));
     }
 
-    public CGameCtnMediaClip Produce()
+    public NodeFile<CGameCtnMediaClip> Produce()
     {
         var tracks = new List<CGameCtnMediaTrack>();
 
@@ -55,10 +56,24 @@ public class GhostToClipTool : ITool, IHasOutput<CGameCtnMediaClip>, IConfigurab
 
         tracks.Add(cameraTrack);
 
-        return CGameCtnMediaClip.Create()
+        var clip = CGameCtnMediaClip.Create()
             .WithTracks(tracks)
             .ForTMUF()
             .Build();
+
+        var firstGhost = ghosts.First();
+
+        var mapName = firstGhost.Validate_ChallengeUid ?? "unknownmap";
+        var time = firstGhost.RaceTime.ToTmString(useApostrophe: true) ?? "unfinished";
+        var author = firstGhost.GhostNickname ?? firstGhost.GhostLogin ?? "unnamed";
+
+        var pureFileName = $"GhostToClip_{TextFormatter.Deformat(mapName)}_{time}_{TextFormatter.Deformat(author)}.Clip.Gbx";
+        var validFileName = string.Join("_", pureFileName.Split(Path.GetInvalidFileNameChars()));
+
+        var forManiaPlanet = GameVersion.IsManiaPlanet(firstGhost);
+        var dir = forManiaPlanet ? "Replays/Clips/GhostToClip" : "Tracks/GhostToClip";
+
+        return new(clip, $"{dir}/{validFileName}", forManiaPlanet);
     }
 
     private CGameCtnMediaBlock GetGhostBlock(CGameCtnGhost ghost) => Config.Game switch
