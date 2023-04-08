@@ -1,12 +1,12 @@
 ﻿using GBX.NET.Engines.Game;
 using GbxToolAPI;
-using System.Runtime.InteropServices.JavaScript;
 using TmEssentials;
 
 namespace GhostToClip;
 
 [ToolName("Ghost to Clip")]
 [ToolDescription("Converts ghost to MediaTracker clip for variety of purposes.")]
+[ToolGitHub("bigbang1112-cz/ghost-to-clip")]
 public class GhostToClipTool : ITool, IHasOutput<NodeFile<CGameCtnMediaClip>>, IConfigurable<GhostToClipConfig>
 {
     private readonly IEnumerable<CGameCtnGhost> ghosts;
