@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhostToClip", "GhostToClip\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GbxToolAPI", "GbxToolAPI\Src\GbxToolAPI\GbxToolAPI.csproj", "{26D6F0F8-B4C5-4E3D-8DC4-4FDFBA1A672D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GbxToolAPI.CLI", "GbxToolAPI\Src\GbxToolAPI.CLI\GbxToolAPI.CLI.csproj", "{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhostToClipCLI", "GhostToClipCLI\GhostToClipCLI.csproj", "{26419C8E-B1BD-421A-A320-B6DB5107863E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,30 @@ Global
 		{26D6F0F8-B4C5-4E3D-8DC4-4FDFBA1A672D}.Release|x64.Build.0 = Release|Any CPU
 		{26D6F0F8-B4C5-4E3D-8DC4-4FDFBA1A672D}.Release|x86.ActiveCfg = Release|Any CPU
 		{26D6F0F8-B4C5-4E3D-8DC4-4FDFBA1A672D}.Release|x86.Build.0 = Release|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Debug|x64.Build.0 = Debug|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Debug|x86.Build.0 = Debug|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Release|x64.ActiveCfg = Release|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Release|x64.Build.0 = Release|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Release|x86.ActiveCfg = Release|Any CPU
+		{4D0CDC55-304F-44BE-A37A-9ECBF4ACACA1}.Release|x86.Build.0 = Release|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Debug|x64.Build.0 = Debug|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Debug|x86.Build.0 = Debug|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Release|x64.ActiveCfg = Release|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Release|x64.Build.0 = Release|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Release|x86.ActiveCfg = Release|Any CPU
+		{26419C8E-B1BD-421A-A320-B6DB5107863E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
