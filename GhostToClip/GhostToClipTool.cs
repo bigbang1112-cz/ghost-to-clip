@@ -13,6 +13,11 @@ public class GhostToClipTool : ITool, IHasOutput<NodeFile<CGameCtnMediaClip>>, I
 
     public GhostToClipConfig Config { get; set; } = new();
 
+    public GhostToClipTool(CGameCtnGhost ghost)
+    {
+        ghosts = new[] { ghost };
+    }
+
     public GhostToClipTool(IEnumerable<CGameCtnGhost> ghosts)
     {
         this.ghosts = ghosts ?? throw new ArgumentNullException(nameof(ghosts));
