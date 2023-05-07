@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -16,7 +16,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\GbxToolAPI\Src\GbxToolAPI.CLI\GbxToolAPI.CLI.csproj" />
+	  <PackageReference Include="GbxToolAPI.CLI" Version="1.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\GhostToClip\GhostToClip.csproj" />
 	</ItemGroup>
 
