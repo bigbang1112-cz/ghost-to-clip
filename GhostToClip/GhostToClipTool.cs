@@ -15,7 +15,7 @@ public class GhostToClipTool : ITool, IHasOutput<NodeFile<CGameCtnMediaClip>>, I
 
     public GhostToClipTool(CGameCtnGhost ghost)
     {
-        ghosts = new[] { ghost };
+        ghosts = [ghost];
     }
 
     public GhostToClipTool(IEnumerable<CGameCtnGhost> ghosts)
